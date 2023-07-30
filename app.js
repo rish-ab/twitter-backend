@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const auth = require("./routes/auth");
@@ -9,11 +10,13 @@ const rateLimit = require("express-rate-limit");
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 mongoose.connect('mongodb+srv://admin:testing123@cluster0.xqgocdg.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
-    .then(() => {
+    .then((res) => {
         console.log("Connection established successfully");
     })
-    .catch(() => {
+    .catch((err) => {
         console.log("Error while establishing connection to mongodb");
     })
 
