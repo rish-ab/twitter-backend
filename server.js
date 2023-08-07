@@ -1,5 +1,5 @@
 var http = require('http');
-var app = require('./app');
+const {app} = require("./app");
 
 var server = http.createServer(app);
 
@@ -12,6 +12,6 @@ const validatePort = (val) => {
 };
 
 
-const port = validatePort(process.env.port || 3000);
+const port = validatePort(process.env.port || 5000);
 
-server.listen(port);
+server.listen(port,console.log(`server started at port ${port}`));

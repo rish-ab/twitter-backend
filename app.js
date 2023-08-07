@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -12,6 +13,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 mongoose.connect('mongodb+srv://admin:testing123@cluster0.xqgocdg.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
     .then((res) => {
         console.log("Connection established successfully");
@@ -20,7 +22,7 @@ mongoose.connect('mongodb+srv://admin:testing123@cluster0.xqgocdg.mongodb.net/?r
         console.log("Error while establishing connection to mongodb");
     })
 
-
+    const jwtSecret = process.env.JWT_SECRET;
 const apiLimiter = new rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minute
   max: 100, // limit each IP to 100 requests per windowMs
